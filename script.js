@@ -35,11 +35,40 @@
     const h = canvas.clientHeight;
     ctx.clearRect(0, 0, w, h);
 
-    const scale = Math.min(w / image.naturalWidth, h / image.naturalHeight);
-    const drawW = image.naturalWidth * scale;
-    const drawH = image.naturalHeight * scale;
-    const x = (w - drawW) / 2;
-    const y = (h - drawH) / 2;
+const isMobile = window.innerWidth <= 900 || w <= 900;
+let drawW, drawH, x, y;
+
+if (isMobile) {
+  // Mobile: make teddy slightly smaller and give it a little top spacing
+  const scale =
+    Math.max(
+      w / image.naturalWidth,
+      (h * 0.86) / image.naturalHeight
+    ) * 0.84;
+
+  drawW = image.naturalWidth * scale;
+  drawH = image.naturalHeight * scale;
+
+  // Center horizontally
+  x = (w - drawW) / 2;
+
+  // Small top margin / move teddy slightly down
+  const topMargin = w <= 520 ? 15 : 10;
+
+  y = topMargin + (h - drawH) * 0.05;
+
+} else {
+  const scale = Math.min(
+    w / image.naturalWidth,
+    h / image.naturalHeight
+  );
+
+  drawW = image.naturalWidth * scale;
+  drawH = image.naturalHeight * scale;
+
+  x = (w - drawW) / 2;
+  y = (h - drawH) / 2;
+}
 
     ctx.drawImage(image, x, y, drawW, drawH);
     currentFrame = index;
