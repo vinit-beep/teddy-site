@@ -140,10 +140,33 @@
   const menu = document.querySelector('.menu');
   const nav = document.querySelector('.nav');
   if (menu && nav) {
-    menu.addEventListener('click', () => nav.classList.toggle('open'));
+    const updateMenuIcon = () => {
+      const isOpen = nav.classList.contains('open');
+      menu.textContent = isOpen ? '✕' : '☰';
+      menu.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      menu.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    };
+
+    menu.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nav.classList.toggle('open');
+      updateMenuIcon();
+    });
+
     nav.querySelectorAll('a').forEach((link) =>
-      link.addEventListener('click', () => nav.classList.remove('open'))
+      link.addEventListener('click', () => {
+        nav.classList.remove('open');
+        updateMenuIcon();
+      })
     );
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (nav.classList.contains('open') && !nav.contains(e.target)) {
+        nav.classList.remove('open');
+        updateMenuIcon();
+      }
+    });
   }
 
   // Scrolled state for nav

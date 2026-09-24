@@ -74,6 +74,17 @@ img { max-width: 100%; display: block; }
 }
 .brand b { font-weight: 700; }
 .brand-mark { font-size: 26px; }
+.brand-logo {
+  height: 72px;
+  width: 100%;
+  max-width: 170px;
+  object-fit: contain;
+  display: block;
+  transition: transform .25s ease;
+}
+.brand:hover .brand-logo {
+  transform: scale(1.03);
+}
 .nav-links {
   display: flex;
   gap: 28px;
@@ -115,8 +126,19 @@ img { max-width: 100%; display: block; }
   border: 0;
   background: none;
   font-size: 24px;
+  line-height: 1;
   color: var(--brown);
   cursor: pointer;
+  padding: 6px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  transition: transform .2s ease, color .2s ease;
+  user-select: none;
+}
+.menu:active {
+  transform: scale(0.9);
 }
 
 /* === 4. Buttons === */
@@ -1131,11 +1153,18 @@ footer .brand { color: white; }
 }
 
 @media (max-width: 900px) {
-  .nav { padding: 0 20px; }
+  .nav {
+    padding: 0 16px;
+    height: 58px;
+  }
+  .brand-logo {
+    height: 38px;
+    max-width: 135px;
+  }
   .nav-links {
     display: none;
     position: absolute;
-    top: 76px; left: 0; right: 0;
+    top: 58px; left: 0; right: 0;
     background: rgba(255, 250, 247, .97);
     backdrop-filter: blur(16px);
     padding: 18px 24px;
@@ -1145,7 +1174,7 @@ footer .brand { color: white; }
   }
   .nav.open .nav-links { display: flex; }
   .nav-cta { display: none; }
-  .menu { display: block; margin-left: auto; }
+  .menu { display: inline-flex; margin-left: auto; }
 
   .sequence { height: 250vh; }
   .sequence-shade {
@@ -1235,7 +1264,10 @@ footer .brand { color: white; }
 
   .imagine { padding: 80px 24px; }
 
-  .accessory-options { grid-template-columns: 1fr; }
+  .accessory-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
 
   footer { padding: 28px 24px; flex-wrap: wrap; gap: 12px; }
 }
@@ -1244,6 +1276,7 @@ footer .brand { color: white; }
 @media (max-width: 520px) {
   .brand { font-size: 13px; }
   .brand-mark { font-size: 22px; }
+  .brand-logo { height: 34px; max-width: 120px; }
 
   .sequence-copy-left p { font-size: 13px; }
   .actions { gap: 8px; }
@@ -1259,8 +1292,54 @@ footer .brand { color: white; }
   }
   .features > div:last-child { border-bottom: 0; }
 
-  .occasion-grid { grid-template-columns: 1fr; gap: 14px; }
-  .occasion-card { padding: 24px 20px; }
+  .occasion-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .occasion-card {
+    padding: 16px 10px;
+    border-radius: 16px;
+  }
+  .occasion-icon {
+    font-size: 30px;
+    margin-bottom: 6px;
+  }
+  .occasion-card h3 {
+    font-size: 15px;
+    margin: 0 0 4px;
+  }
+  .occasion-card p {
+    font-size: 11px;
+    line-height: 1.35;
+    margin: 0 0 8px;
+  }
+  .occasion-link {
+    font-size: 11px;
+  }
+
+  .accessory-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .accessory-btn {
+    padding: 10px 8px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+  .acc-icon {
+    font-size: 18px;
+  }
+  .acc-info strong {
+    font-size: 11px;
+    line-height: 1.25;
+  }
+  .acc-info small {
+    font-size: 10px;
+  }
+  .acc-check {
+    width: 16px;
+    height: 16px;
+  }
 
   .product-img { height: 280px; }
 
